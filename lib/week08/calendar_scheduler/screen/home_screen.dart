@@ -62,7 +62,10 @@ class HomeScreen extends StatelessWidget{
               ),
               SizedBox(height: 8.0,),
               
-             adfs
+             TodayBanner(
+              selectedDate: selectedDate,
+              count: schedules.length,
+             ),
               SizedBox(height: 8.0,),
               Expanded( //남는 공간을 모두 차지하기
               //일정 정보가 Stream으로 제공되기 때문에 StreamBuilder 사용
