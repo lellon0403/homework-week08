@@ -85,7 +85,7 @@ class ScheduleProvider extends ChangeNotifier {
 
     cache.update(
       targetDate,
-        (value) => [ //현존하는 캐시 리스트 끄텡 새로운 일정 추가
+        (value) => [ //현존하는 캐시 리스트 끝에 새로운 일정 추가
         ...value,
         schedule.copyWith(
           id: savedSchedule,
