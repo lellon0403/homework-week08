@@ -14,6 +14,13 @@ class ScheduleRepository {
   }) async {
     final resp = await _dio.get(
       _targetUrl,
-    )
+      queryParameters: { // Query 매개변수
+        'date': 
+        '${date.year}${date.month.toString().padLeft(2,'0')}${date.day.toString().padLeft(2,'0')}'
+        },
+    );
+
+    return resp.data // 모델 인스턴스로 데이터 매핑하기
+    .map<ScheduleModel>
   }
 }
