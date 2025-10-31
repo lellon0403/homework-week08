@@ -32,4 +32,30 @@ class ScheduleProvider extends ChangeNotifier {
     cache.update(date,(value) => resp, ifAbsent: ()  => resp);
     notifyListeners();
   }
+
+  void createSchedule({
+    required ScheduleModel schedule,
+  }) async {
+    final targetDate = schedule.date;
+
+    final savedSchedule = await repository.createSchedule(schedule:schedule);
+
+    cache.update(
+      targetDate,
+        (value) => [ //현존하는 캐시 리스트 끄텡 새로운 일정 추가
+        ...value,
+        schedule.copyWith(
+          id: savedSchedule,
+        ),
+        ]..sort(
+          (a,b) => a.startTime.compareTo(
+            b.startTime,
+          ),
+        ),
+        // 날짜에 해당되는 값이 없다면 새로운 리스트에 새로운 일정 하나만 추가
+        ifAbsent: () => [schedule],
+    );
+
+    notifyListeners();
+  }
 }
