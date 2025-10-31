@@ -55,7 +55,21 @@ class ScheduleProvider extends ChangeNotifier {
         // 날짜에 해당되는 값이 없다면 새로운 리스트에 새로운 일정 하나만 추가
         ifAbsent: () => [schedule],
     );
-
     notifyListeners();
+  }
+
+  void deleteSchedule({
+    required DateTime date,
+    required String id,
+  }) async {
+    final resp = await repository.deleteSchedule(id: id);
+
+    cache.update( //캐시에서 데이터 삭제
+    date,
+    (value) => value.where((e) => e.id != id).toList(),
+      ifAbsent: () => [],
+      );
+
+      notifyListeners();
   }
 }
