@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget{
               MainCalendar(
                 selectedDate: selectedDate, //선택된 날짜 전달하기
                 //날짜가 선택됐을 때 실행할 함수
-                onDaySelected: onDaySelected,
+                onDaySelected: (selectedDate, focusedDate) => onDaySelected(selectedDate, focusedDate, context),
 
               ),
               SizedBox(height: 8.0,),
