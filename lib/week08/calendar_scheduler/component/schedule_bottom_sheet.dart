@@ -88,7 +88,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet>{
                   width: double.infinity,
                   child: ElevatedButton( //저장 버튼
                     //[저장] 버튼
-                    onPressed: onSavePressed(context), //함수에 context 전달
+                    onPressed: () => onSavePressed(context), //함수에 context 전달
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: PRIMARY_COLOR,
@@ -118,7 +118,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet>{
           endTime: endTime!,
         ),
       );
-      
+
       Navigator.of(context).pop(); //일정 생성 후 화면 뒤로 가기
     }
   }
