@@ -4,6 +4,7 @@ import 'package:myapp/week08/calendar_scheduler/repository/schedule_repository.d
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class ScheduleProvider extends ChangeNotifier {
   final ScheduleRepository repository; //API 요청 로직을 담은 클래스
