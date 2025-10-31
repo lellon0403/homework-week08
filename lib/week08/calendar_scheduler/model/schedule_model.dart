@@ -22,9 +22,11 @@ ScheduleModel({
   startTime = json['startTime'],
   endTime = json['endTime'];
 
-  Map<String, dynamic> to Json() { //모델을 다시 JSon 으로 변환
+  Map<String, dynamic> toJson() { //모델을 다시 JSon 으로 변환
   return {
     'id' : id,
-    'con'
+    'content' : content,
+    'date' : 
+    '${date.year}${date.month}${}'
       }}
 }
