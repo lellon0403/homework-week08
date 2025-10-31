@@ -67,17 +67,8 @@ class HomeScreen extends StatelessWidget{
               count: schedules.length,
              ),
               SizedBox(height: 8.0,),
-              Expanded( //남는 공간을 모두 차지하기
-              //일정 정보가 Stream으로 제공되기 때문에 StreamBuilder 사용
-               child: StreamBuilder<List<Schedule>>(
-                  stream: GetIt.I<LocalDatabase>().watchSchedules(selectedDate),
-                  builder: (context,snapshot){
-                    if(!snapshot.hasData){ //데이터가 없을때
-                    return Container();
-                    }
-
-                    //화면에 보이는 값들만 렌더링하는 리스트
-                    return ListView.builder(
+              Expanded( 
+                  child: ListView.builder(
                       //리스트에 입력할 값들의 총 개수
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context,index){
@@ -102,9 +93,10 @@ class HomeScreen extends StatelessWidget{
                         );
                       },
                     );
-                  }
+                 
+
+                ),
                ),
-              ),
             ],),
         ),
    ) ;
