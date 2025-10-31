@@ -100,7 +100,9 @@ class HomeScreen extends StatelessWidget{
   }
 
 
-void onDaySelected(DateTime selectedDate, DateTime focusedDate){
+void onDaySelected(
+  DateTime selectedDate, 
+  DateTime focusedDate){
   //함수에 있는 로직 모두 삭제
 }
 }
