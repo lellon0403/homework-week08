@@ -80,24 +80,7 @@ class ScheduleProvider extends ChangeNotifier {
         (value) => value.where((e) => e.id != tempId).toList(),
         );
     }
-
     final savedSchedule = await repository.createSchedule(schedule:schedule);
-
-    cache.update(
-      targetDate,
-        (value) => [ //현존하는 캐시 리스트 끝에새로운 일정 추가
-        ...value,
-        schedule.copyWith(
-          id: savedSchedule,
-        ),
-        ]..sort(
-          (a,b) => a.startTime.compareTo(
-            b.startTime,
-          ),
-        ),
-        // 날짜에 해당되는 값이 없다면 새로운 리스트에 새로운 일정 하나만 추가
-        ifAbsent: () => [schedule],
-    );
     notifyListeners();
   }
 
