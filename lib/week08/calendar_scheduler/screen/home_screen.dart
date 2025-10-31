@@ -71,7 +71,8 @@ class HomeScreen extends StatelessWidget{
                   child: ListView.builder(
                       itemCount: schedules.length,
                       itemBuilder: (context,index){
-                        final schedule = snapshot.data![index];
+                        final schedule = schedules[index];
+                        
                         return Dismissible(
                           key: ObjectKey(schedule.id), //유니크한 키값
                           //밀기 했을 때 실행할 함수
