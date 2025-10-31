@@ -80,7 +80,6 @@ class ScheduleProvider extends ChangeNotifier {
         (value) => value.where((e) => e.id != tempId).toList(),
         );
     }
-    final savedSchedule = await repository.createSchedule(schedule:schedule);
     notifyListeners();
   }
 
@@ -88,7 +87,7 @@ class ScheduleProvider extends ChangeNotifier {
     required DateTime date,
     required String id,
   }) async {
-    final resp = await repository.deleteSchedule(id: id);
+    final  = await repository.deleteSchedule(id: id);
 
     cache.update( //캐시에서 데이터 삭제
     date,
