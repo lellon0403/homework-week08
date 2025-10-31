@@ -42,7 +42,7 @@ class ScheduleProvider extends ChangeNotifier {
     final uuid = Uuid();
 
     final tempId = uuid.v4(); //유일한 ID값을 생성합니다.
-    final newSchedule = schedule.copy
+    final newSchedule = schedule.co
 
     final savedSchedule = await repository.createSchedule(schedule:schedule);
 
