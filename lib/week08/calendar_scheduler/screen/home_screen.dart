@@ -69,10 +69,8 @@ class HomeScreen extends StatelessWidget{
               SizedBox(height: 8.0,),
               Expanded( 
                   child: ListView.builder(
-                      //리스트에 입력할 값들의 총 개수
-                      itemCount: snapshot.data!.length,
+                      itemCount: schedules.length,
                       itemBuilder: (context,index){
-                        //현재 index에 해당되는 일정
                         final schedule = snapshot.data![index];
                         return Dismissible(
                           key: ObjectKey(schedule.id), //유니크한 키값
