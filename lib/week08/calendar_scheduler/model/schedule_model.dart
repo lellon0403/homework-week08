@@ -27,6 +27,6 @@ ScheduleModel({
     'id' : id,
     'content' : content,
     'date' : 
-    '${date.year}${date.month}${}'
+    '${date.year}${date.month.toString().padLeft(2,'0')}'
       }}
 }
