@@ -85,7 +85,7 @@ class ScheduleProvider extends ChangeNotifier {
 
     cache.update(
       targetDate,
-        (value) => [ //현존하는 캐시 리스트 끝에 새로운 일정 추가
+        (value) => [ //현존하는 캐시 리스트 끝에새로운 일정 추가
         ...value,
         schedule.copyWith(
           id: savedSchedule,
@@ -105,7 +105,7 @@ class ScheduleProvider extends ChangeNotifier {
     required DateTime date,
     required String id,
   }) async {
-    final targetSch = await repository.deleteSchedule(id: id);
+    final resp = await repository.deleteSchedule(id: id);
 
     cache.update( //캐시에서 데이터 삭제
     date,
