@@ -69,7 +69,13 @@ class ScheduleProvider extends ChangeNotifier {
     (value) => value.where((e) => e.id != id).toList(),
       ifAbsent: () => [],
       );
-
       notifyListeners();
+  }
+
+  void changeSelectedDate({
+    required DateTime date,
+  }) {
+    selectedDate = date; //현재 선택된 날짜를 매개변수로 입력받은 날짜로 변경
+    notifyListeners();
   }
 }
