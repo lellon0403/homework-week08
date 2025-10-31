@@ -23,15 +23,29 @@ ScheduleModel({
   endTime = json['endTime'];
 
   Map<String, dynamic> toJson() { //모델을 다시 JSon 으로 변환
-  return {
-    'id' : id,
-    'content' : content,
-    'date' : 
-    '${date.year}${date.month.toString().padLeft(2,'0')}${date.day.toString().padLeft(2,'0')}',
-    'startTime' : startTime,
-    'endTime' : endTime,
-    };    
+    return {
+      'id' : id,
+      'content' : content,
+      'date' : 
+      '${date.year}${date.month.toString().padLeft(2,'0')}${date.day.toString().padLeft(2,'0')}',
+      'startTime' : startTime,
+      'endTime' : endTime,
+      };    
   }
 
-  
+  ScheduleModel copyWith({ //현재 모델을 특정 속성만 변환해서 새로 생성
+  String? id,
+  String? content,
+  DateTime? date,
+  int? startTime,
+  int? endTime,
+  }) {
+    return ScheduleModel(
+      id: id ?? this.id,
+      content: content ?? this.content,
+      date: date ?? this.date,
+      startTime: startTime ?? this.startTime,
+      endTime: endTime ?? this.endTime,
+    );
+  }
 }
