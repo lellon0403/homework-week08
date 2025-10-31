@@ -109,14 +109,16 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet>{
     if(formKey.currentState!.validate()){ //폼 검증하기
       formKey.currentState!.save();
 
-      await GetIt.I<LocalDatabase>().createSchedule( //일정 생성하기
-        SchedulesCompanion(
-          startTime: Value(startTime!),
-          endTime: Value(endTime!),
-          content: Value(content!),
-          date: Value(widget.selectedDate),
+      context.read<ScheduleProvider>().createSchedule(
+        schedule: ScheduleModel(
+          id: 'new_model', //임시 ID
+          content: content!,
+          date: widget.selectedDate,
+          startTime: startTime!,
+          endTime: endTime!,
         ),
       );
+      
       Navigator.of(context).pop(); //일정 생성 후 화면 뒤로 가기
     }
   }
