@@ -90,12 +90,27 @@ class ScheduleProvider extends ChangeNotifier {
     final targetSchedule = cache[date]!.firstWhere(
       (e) => e.id == id,
     ); //삭제할 일정 기억
-    
+
     cache.update( //캐시에서 데이터 삭제
     date,
     (value) => value.where((e) => e.id != id).toList(),
       ifAbsent: () => [],
-      );
+      ); //긍정적 응답 (응답 전에 캐시 먼저 업데이트)
+      notifyListeners(); //캐시 업데이트 반영하기
+
+      try {
+        await repository.deleteSchedule(id:id); //삭제 함수 실행
+      } catch(e) {
+        //삭제 실패 시 캐시 롤백하기
+        cache.update(
+          date,
+          (value) => [...value, targetSchedule]..sort(
+            (a,b) => a.startTime.compareTo(
+              b.startTime,
+            ),
+          ),
+        );
+      }
       notifyListeners();
   }
 
