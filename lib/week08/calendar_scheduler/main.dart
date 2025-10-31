@@ -20,10 +20,10 @@ void main() async{
 
   runApp(
     ChangeNotifierProvider( //Provider 하위 위젯에 제공하기
-     create: (_) => ScheduleProvider,
-     child: 
-    MaterialApp(
+     create: (_) => scheduleProvider,
+     child: MaterialApp(
       home: HomeScreen(),
+    )
     )
   );
 }
