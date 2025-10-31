@@ -20,6 +20,15 @@ class HomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    
+    // 프로바이더 변경이 있을 때마대 build() 함수 재실행
+    final provider = context.watch<ScheduleProvider>();
+
+    final selectedDate = provider.selectedDate;
+
+    // 선택된 날짜에 해당되는 일정들 가져오기
+    final schedules = provider.cache[selectedDate] ?? [];
+    
     return Scaffold(
       floatingActionButton: FloatingActionButton( //새 일정 버튼
         backgroundColor: PRIMARY_COLOR,
