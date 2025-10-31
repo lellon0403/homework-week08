@@ -17,7 +17,14 @@ ScheduleModel({
   ScheduleModel.fromJson({// JSON으로부터 모델을 만들어내는 생성자
   required Map<String, dynamic> json,
   }) : id = json['id'],
-  content = DateTime.parse(json['date']),
+  content = json['content'],
   date = DateTime.parse(json['date']),
-  startTime
+  startTime = json['startTime'],
+  endTime = json['endTime'];
+
+  Map<String, dynamic> to Json() { //모델을 다시 JSon 으로 변환
+  return {
+    'id' : id,
+    'con'
+      }}
 }
