@@ -39,6 +39,43 @@ class ScheduleProvider extends ChangeNotifier {
   }) async {
     final targetDate = schedule.date;
 
+    final uuid = Uuid();
+
+    final tempId = uuid.v4(); //유일한 ID값을 생성합니다.
+    final newSchedule = schedule.copyWith(
+      id: tempId, //임시 ID를 지정합니다
+    );
+    //긍정적 응답 구간입니다. 서버에서 응답을 받기 전에 캐시를 먼저 업데이트 합니다
+    cache.update(
+      targetDate,
+      (value) => [
+        ...value,
+        newSchedule,
+      ]..sort(
+        (a,b) => a.startTime.compareTo(
+          b.startTime,
+        ),
+      ),
+      ifAbsent: () => [newSchedule],
+    );
+    notifyListeners(); //캐시 업데이트 반영하기
+
+    try {
+      //API 요청을 합니다.
+      final savedSchedule = await repository.createSchedule(schedule: schedule);
+
+      cache.update( //서버 응답 기반으로 캐시 업데이트
+        targetDate,
+        (value) => value
+        .map((e) => e.id == tempId
+        ? e.copyWith(
+          id: savedSchedule,
+        )
+        :e)
+        .toList(),
+        );
+    }
+
     final savedSchedule = await repository.createSchedule(schedule:schedule);
 
     cache.update(
