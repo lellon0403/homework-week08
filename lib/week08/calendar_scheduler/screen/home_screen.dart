@@ -7,6 +7,8 @@ import 'package:myapp/week08/calendar_scheduler/component/schedule_bottom_sheet.
 import 'package:myapp/week08/calendar_scheduler/const/colors.dart';
 import 'package:get_it/get_it.dart';
 import 'package:myapp/week08/calendar_scheduler/database/drift_database.dart';
+import 'package:provider/provider.dart'; //Provider 불러오기
+import 'package:myapp/week08/calendar_scheduler/provider/schedule_provider.dart';
 
 class HomeScreen extends StatelessWidget{
   
