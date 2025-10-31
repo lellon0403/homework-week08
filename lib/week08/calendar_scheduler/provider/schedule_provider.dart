@@ -4,6 +4,7 @@ import 'package:myapp/week08/calendar_scheduler/repository/schedule_repository.d
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class ScheduleProvider extends ChangeNotifier {
   final ScheduleRepository repository; //API 요청 로직을 담은 클래스
@@ -37,6 +38,48 @@ class ScheduleProvider extends ChangeNotifier {
     required ScheduleModel schedule,
   }) async {
     final targetDate = schedule.date;
+
+    final uuid = Uuid();
+
+    final tempId = uuid.v4(); //유일한 ID값을 생성합니다.
+    final newSchedule = schedule.copyWith(
+      id: tempId, //임시 ID를 지정합니다
+    );
+    //긍정적 응답 구간입니다. 서버에서 응답을 받기 전에 캐시를 먼저 업데이트 합니다
+    cache.update(
+      targetDate,
+      (value) => [
+        ...value,
+        newSchedule,
+      ]..sort(
+        (a,b) => a.startTime.compareTo(
+          b.startTime,
+        ),
+      ),
+      ifAbsent: () => [newSchedule],
+    );
+    notifyListeners(); //캐시 업데이트 반영하기
+
+    try {
+      //API 요청을 합니다.
+      final savedSchedule = await repository.createSchedule(schedule: schedule);
+
+      cache.update( //서버 응답 기반으로 캐시 업데이트
+        targetDate,
+        (value) => value
+        .map((e) => e.id == tempId
+        ? e.copyWith(
+          id: savedSchedule,
+        )
+        :e)
+        .toList(),
+        );
+    } catch(e) {
+      cache.update( //일정 생성실패시 롤백하기
+        targetDate,
+        (value) => value.where((e) => e.id != tempId).toList(),
+        );
+    }
 
     final savedSchedule = await repository.createSchedule(schedule:schedule);
 
