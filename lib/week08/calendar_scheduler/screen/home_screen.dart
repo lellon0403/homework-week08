@@ -106,9 +106,6 @@ class HomeScreen extends StatelessWidget{
 
 
 void onDaySelected(DateTime selectedDate, DateTime focusedDate){
-  //날짜 선택될 때마다 실행할 함수
-  setState((){
-    this.selectedDate = selectedDate;
-  });
+  //함수에 있는 로직 모두 삭제
 }
 }
