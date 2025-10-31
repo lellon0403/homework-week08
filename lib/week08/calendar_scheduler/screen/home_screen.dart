@@ -72,13 +72,12 @@ class HomeScreen extends StatelessWidget{
                       itemCount: schedules.length,
                       itemBuilder: (context,index){
                         final schedule = schedules[index];
-                        
+
                         return Dismissible(
                           key: ObjectKey(schedule.id), //유니크한 키값
                           //밀기 했을 때 실행할 함수
                           onDismissed: (DismissDirection direction) {
-                            GetIt.I<LocalDatabase>()
-                            .removeSchedule(schedule.id);
+                            provider.deleteSchedule(date: selectedDate,id: schedule.id); 
                           },
 
                           child: Padding( //좌우로 패딩을 추가해서 UI 개선
