@@ -9,5 +9,5 @@ class ScheduleModel {
 ScheduleModel({
   required this.id,
   required this.content,
-  re
-})
+  required this.date,
+});
