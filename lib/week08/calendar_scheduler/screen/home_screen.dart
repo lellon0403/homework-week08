@@ -102,7 +102,15 @@ class HomeScreen extends StatelessWidget{
 
 void onDaySelected(
   DateTime selectedDate, 
-  DateTime focusedDate){
+  DateTime focusedDate,
+  BuildContext context,
+  )
+  {
+    final provider =context.read<ScheduleProvider>();
+    provider.changeSelectedDate(
+      date: selectedDate,
+    );
+    provider.getSchedules(date: selectedDate);
   //함수에 있는 로직 모두 삭제
 }
 }
