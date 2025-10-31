@@ -88,7 +88,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet>{
                   width: double.infinity,
                   child: ElevatedButton( //저장 버튼
                     //[저장] 버튼
-                    onPressed: onSavePressed,
+                    onPressed: onSavePressed(context), //함수에 context 전달
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: PRIMARY_COLOR,
@@ -105,7 +105,7 @@ class _ScheduleBottomSheetState extends State<ScheduleBottomSheet>{
     );
   }
 
-  void onSavePressed() async{
+  void onSavePressed(BuildContext context) async{
     if(formKey.currentState!.validate()){ //폼 검증하기
       formKey.currentState!.save();
 
