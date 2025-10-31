@@ -40,8 +40,11 @@ class ScheduleRepository {
   }
 
   Future<String> deleteSchedule({
-    required 
+    required String id,
+  }) async {
+    final resp = await _dio.delete(_targetUrl, data:  {'id':id , //삭제할 ID 값
+    });
 
-  })
-  
+    return resp.data?['id']; //삭제된 ID값 반환
+  }
 }
