@@ -87,8 +87,10 @@ class ScheduleProvider extends ChangeNotifier {
     required DateTime date,
     required String id,
   }) async {
-    final  = await repository.deleteSchedule(id: id);
-
+    final targetSchedule = cache[date]!.firstWhere(
+      (e) => e.id == id,
+    ); //삭제할 일정 기억
+    
     cache.update( //캐시에서 데이터 삭제
     date,
     (value) => value.where((e) => e.id != id).toList(),
