@@ -12,5 +12,13 @@ class ScheduleProvider extends ChangeNotifier {
     DateTime.now().year,
     DateTime.now().month,
     DateTime.now().day,
-    );
+  );
+
+  Map<DateTime,List<ScheduleModel>> cache = {}; //일정 정보를 저장해둘 변수
+
+  ScheduleProvider({
+    required this.repository,
+  }) : super() {
+    getSchedules(date: selectedDate);
+  }
 }
